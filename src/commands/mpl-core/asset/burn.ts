@@ -11,7 +11,7 @@ export default class MplCoreAssetBurn extends BaseCommand<typeof MplCoreAssetBur
   static override description = 'Burn an asset'
 
   public async run(): Promise<void> {
-    const {args, flags} = await this.parse(MplCoreAssetBurn)
+    const {args} = await this.parse(MplCoreAssetBurn)
 
     const {asset} = args
     if (!asset) {

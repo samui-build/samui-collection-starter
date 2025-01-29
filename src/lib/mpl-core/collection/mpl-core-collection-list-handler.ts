@@ -21,6 +21,7 @@ export async function mplCoreCollectionListHandler(authority: string, options: S
       .whereField('updateAuthority', publicKey(authority))
       .whereField('key', Key.CollectionV1)
       .get()
+    // eslint-disable-next-line no-warning-comments
     // TODO use getDeserialized() instead of the following temporary workaround for devnet breaking changes
     const collections = accounts
       .map((account) => {

@@ -12,6 +12,7 @@ export async function mplCoreCollectionBurnHandler(collection: string, options: 
   console.log(found)
 
   if (found.numMinted > 0 && found.currentSize > 0) {
+    // eslint-disable-next-line no-warning-comments
     // TODO: Add a confirmation prompt
     console.log(`Collection ${collection} is not empty.`)
     return

@@ -9,6 +9,7 @@ export function getExplorerUrl(path: string, cluster: ExplorerUrlCluster) {
 
   const suffix = cluster === 'mainnet' ? '' : `?cluster=${cluster.replace('local', 'custom')}`;
 
+  // eslint-disable-next-line no-warning-comments
   // TODO: Add support 'solana' | 'solana-fm' | 'solscan' | 'custom'
   // Should be configurable through env vars and cli option
   const explorerUrl = 'https://explorer.solana.com';

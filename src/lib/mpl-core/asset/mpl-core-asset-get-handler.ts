@@ -9,6 +9,7 @@ export async function mplCoreAssetGetHandler(assetAddress: string, options: Samu
 
   try {
     const asset = await fetchAssetV1(umi, publicKey(assetAddress))
+    // eslint-disable-next-line no-warning-comments
     // TODO: Make fetching collection optional
     const assetCollectionAddress = collectionAddress(asset)
 

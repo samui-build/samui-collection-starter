@@ -12,7 +12,7 @@ export default class MplCoreAssetGet extends BaseCommand<typeof MplCoreAssetGet>
 
 
   public async run(): Promise<void> {
-    const {args, flags} = await this.parse(MplCoreAssetGet)
+    const {args} = await this.parse(MplCoreAssetGet)
 
 
     const {asset} = args
