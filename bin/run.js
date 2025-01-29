@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --disable-warning=DeprecationWarning
 
 import {execute} from '@oclif/core'
 

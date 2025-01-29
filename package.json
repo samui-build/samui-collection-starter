@@ -8,9 +8,16 @@
   },
   "bugs": "https://github.com/samui-build/samui-collection-starter/issues",
   "dependencies": {
+    "@metaplex-foundation/mpl-core": "^1.2.0",
+    "@metaplex-foundation/umi": "^1.0.0",
+    "@metaplex-foundation/umi-bundle-defaults": "^1.0.0",
+    "@metaplex-foundation/umi-signer-wallet-adapters": "^1.0.0",
     "@oclif/core": "^4",
     "@oclif/plugin-help": "^6",
-    "@oclif/plugin-plugins": "^5"
+    "@oclif/plugin-plugins": "^5",
+    "@solana/web3.js": "1",
+    "dotenv": "^16.4.7",
+    "whatwg-url": "^14.1.0"
   },
   "devDependencies": {
     "@eslint/compat": "^1",
@@ -62,11 +69,13 @@
   "repository": "samui-build/samui-collection-starter",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
+    "build:watch": "pnpm run build --watch",
     "lint": "eslint",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
     "prepack": "oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "validator": "docker run -it -p 8899:8899 -p 8900:8900 --rm --name samui-test-validator ghcr.io/samui-build/samui-test-validator:latest",
     "version": "oclif readme && git add README.md"
   },
   "types": "dist/index.d.ts"
