@@ -9,7 +9,10 @@ export default class Config extends BaseCommand<typeof Config> {
       this.log(`  => ${flag}: ${value}`)
     }
 
-    const genesisHash = await this.getUmi().rpc.getGenesisHash()
+    const {cluster, explorerUrl, genesisHash, keypair} = this.getSamuiContext()
+
+    this.log(`  => cluster: ${cluster}`)
     this.log(`  => genesisHash: ${genesisHash}`)
+    this.log(`  => keypair: ${keypair.publicKey.toBase58()} ${explorerUrl(keypair.publicKey.toBase58())}`)
   }
 }

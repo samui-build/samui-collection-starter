@@ -3,14 +3,9 @@ import 'dotenv/config'
 import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 
-import { getUmi, Umi } from "./lib/get-umi.js";
+import { getSamuiContext, SamuiContext } from "./lib/get-samui-context.js";
+import { SamuiConfig } from "./lib/parse-solana-config.js";
 
-
-export type SamuiConfig = {
-  rpcUrl: string
-  rpcUrlSubscriptions: string
-  signerSecretKey: string
-}
 
 export type Flags<T extends typeof Command> = Interfaces.InferredFlags<(typeof BaseCommand)['baseFlags'] & T['flags']>
 export type Args<T extends typeof Command> = Interfaces.InferredArgs<T['args']>
@@ -42,15 +37,20 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
   static strict = true
   protected args!: Args<T>
   protected flags!: Flags<T>
-  #umi?: Umi
+  #samui: SamuiContext | undefined
 
-  getUmi(): Umi {
-    if (!this.#umi) {
-      throw new Error('Missing umi client')
+  getSamuiContext(): SamuiContext {
+    if (!this.#samui) {
+      throw new Error('Missing samui context')
     }
 
-    return this.#umi
+    if (!this.#samui.umi) {
+      throw new Error('Missing samui umi client')
+    }
+
+    return this.#samui
   }
+
 
   async init(): Promise<void> {
     await super.init()
@@ -89,9 +89,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
       signerSecretKey,
     }
     try {
-      // Initialize the Umi client
-      this.#umi = getUmi({config})
-      this.log(`Umi initialized with RPC URL: ${config.rpcUrl}`)
+      this.#samui = await getSamuiContext(config)
     } catch (error) {
       this.logJson({...config, signerSecretKey: 'REDACTED'})
       throw new Error(`Failed to initialize Umi context: ${error}`)
