@@ -20,7 +20,7 @@ $ npm install -g samui-collection-starter
 $ samui-collection-starter COMMAND
 running command...
 $ samui-collection-starter (--version)
-samui-collection-starter/0.0.0 darwin-arm64 node-v22.12.0
+samui-collection-starter/0.0.0 linux-x64 node-v20.18.2
 $ samui-collection-starter --help [COMMAND]
 USAGE
   $ samui-collection-starter COMMAND
@@ -29,9 +29,16 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`samui-collection-starter hello PERSON`](#samui-collection-starter-hello-person)
-* [`samui-collection-starter hello world`](#samui-collection-starter-hello-world)
+* [`samui-collection-starter config`](#samui-collection-starter-config)
 * [`samui-collection-starter help [COMMAND]`](#samui-collection-starter-help-command)
+* [`samui-collection-starter mpl-core asset burn ASSET`](#samui-collection-starter-mpl-core-asset-burn-asset)
+* [`samui-collection-starter mpl-core asset create COLLECTION`](#samui-collection-starter-mpl-core-asset-create-collection)
+* [`samui-collection-starter mpl-core asset get ASSET`](#samui-collection-starter-mpl-core-asset-get-asset)
+* [`samui-collection-starter mpl-core asset list COLLECTION`](#samui-collection-starter-mpl-core-asset-list-collection)
+* [`samui-collection-starter mpl-core collection burn COLLECTION`](#samui-collection-starter-mpl-core-collection-burn-collection)
+* [`samui-collection-starter mpl-core collection create [NAME] [URI]`](#samui-collection-starter-mpl-core-collection-create-name-uri)
+* [`samui-collection-starter mpl-core collection get COLLECTION`](#samui-collection-starter-mpl-core-collection-get-collection)
+* [`samui-collection-starter mpl-core collection list [AUTHORITY]`](#samui-collection-starter-mpl-core-collection-list-authority)
 * [`samui-collection-starter plugins`](#samui-collection-starter-plugins)
 * [`samui-collection-starter plugins add PLUGIN`](#samui-collection-starter-plugins-add-plugin)
 * [`samui-collection-starter plugins:inspect PLUGIN...`](#samui-collection-starter-pluginsinspect-plugin)
@@ -43,47 +50,24 @@ USAGE
 * [`samui-collection-starter plugins unlink [PLUGIN]`](#samui-collection-starter-plugins-unlink-plugin)
 * [`samui-collection-starter plugins update`](#samui-collection-starter-plugins-update)
 
-## `samui-collection-starter hello PERSON`
+## `samui-collection-starter config`
 
-Say hello
-
-```
-USAGE
-  $ samui-collection-starter hello PERSON -f <value>
-
-ARGUMENTS
-  PERSON  Person to say hello to
-
-FLAGS
-  -f, --from=<value>  (required) Who is saying hello
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ samui-collection-starter hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
-```
-
-_See code: [src/commands/hello/index.ts](https://github.com/samui-build/samui-collection-starter/blob/v0.0.0/src/commands/hello/index.ts)_
-
-## `samui-collection-starter hello world`
-
-Say hello world
+Show the configuration of the CLI
 
 ```
 USAGE
-  $ samui-collection-starter hello world
+  $ samui-collection-starter config [--keypair-path <value>] [--rpc-url <value>] [--rpc-url-ws <value>]
+
+GLOBAL FLAGS
+  --keypair-path=<value>  [default: ~/.config/solana/id.json] Specify the Solana keypair path.
+  --rpc-url=<value>       [default: https://api.devnet.solana.com/] Specify the Solana RPC URL.
+  --rpc-url-ws=<value>    Specify the Solana RPC websocket URL, default will be inferred from the RPC URL.
 
 DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ samui-collection-starter hello world
-  hello world! (./src/commands/hello/world.ts)
+  Show the configuration of the CLI
 ```
 
-_See code: [src/commands/hello/world.ts](https://github.com/samui-build/samui-collection-starter/blob/v0.0.0/src/commands/hello/world.ts)_
+_See code: [src/commands/config.ts](https://github.com/samui-build/samui-collection-starter/blob/v0.0.0/src/commands/config.ts)_
 
 ## `samui-collection-starter help [COMMAND]`
 
@@ -104,6 +88,195 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.2.23/src/commands/help.ts)_
+
+## `samui-collection-starter mpl-core asset burn ASSET`
+
+Burn an asset
+
+```
+USAGE
+  $ samui-collection-starter mpl-core asset burn ASSET [--keypair-path <value>] [--rpc-url <value>] [--rpc-url-ws
+  <value>]
+
+ARGUMENTS
+  ASSET  Asset address
+
+GLOBAL FLAGS
+  --keypair-path=<value>  [default: ~/.config/solana/id.json] Specify the Solana keypair path.
+  --rpc-url=<value>       [default: https://api.devnet.solana.com/] Specify the Solana RPC URL.
+  --rpc-url-ws=<value>    Specify the Solana RPC websocket URL, default will be inferred from the RPC URL.
+
+DESCRIPTION
+  Burn an asset
+```
+
+_See code: [src/commands/mpl-core/asset/burn.ts](https://github.com/samui-build/samui-collection-starter/blob/v0.0.0/src/commands/mpl-core/asset/burn.ts)_
+
+## `samui-collection-starter mpl-core asset create COLLECTION`
+
+Create an asset in a collection
+
+```
+USAGE
+  $ samui-collection-starter mpl-core asset create COLLECTION -n <value> -u <value> [--keypair-path <value>] [--rpc-url
+    <value>] [--rpc-url-ws <value>]
+
+ARGUMENTS
+  COLLECTION  Collection address
+
+FLAGS
+  -n, --name=<value>  (required) Asset name
+  -u, --uri=<value>   (required) Asset Metadata URI
+
+GLOBAL FLAGS
+  --keypair-path=<value>  [default: ~/.config/solana/id.json] Specify the Solana keypair path.
+  --rpc-url=<value>       [default: https://api.devnet.solana.com/] Specify the Solana RPC URL.
+  --rpc-url-ws=<value>    Specify the Solana RPC websocket URL, default will be inferred from the RPC URL.
+
+DESCRIPTION
+  Create an asset in a collection
+```
+
+_See code: [src/commands/mpl-core/asset/create.ts](https://github.com/samui-build/samui-collection-starter/blob/v0.0.0/src/commands/mpl-core/asset/create.ts)_
+
+## `samui-collection-starter mpl-core asset get ASSET`
+
+Get an asset
+
+```
+USAGE
+  $ samui-collection-starter mpl-core asset get ASSET [--keypair-path <value>] [--rpc-url <value>] [--rpc-url-ws
+  <value>]
+
+ARGUMENTS
+  ASSET  Asset address
+
+GLOBAL FLAGS
+  --keypair-path=<value>  [default: ~/.config/solana/id.json] Specify the Solana keypair path.
+  --rpc-url=<value>       [default: https://api.devnet.solana.com/] Specify the Solana RPC URL.
+  --rpc-url-ws=<value>    Specify the Solana RPC websocket URL, default will be inferred from the RPC URL.
+
+DESCRIPTION
+  Get an asset
+```
+
+_See code: [src/commands/mpl-core/asset/get.ts](https://github.com/samui-build/samui-collection-starter/blob/v0.0.0/src/commands/mpl-core/asset/get.ts)_
+
+## `samui-collection-starter mpl-core asset list COLLECTION`
+
+List assets by collection
+
+```
+USAGE
+  $ samui-collection-starter mpl-core asset list COLLECTION [--keypair-path <value>] [--rpc-url <value>] [--rpc-url-ws
+    <value>]
+
+ARGUMENTS
+  COLLECTION  Collection address
+
+GLOBAL FLAGS
+  --keypair-path=<value>  [default: ~/.config/solana/id.json] Specify the Solana keypair path.
+  --rpc-url=<value>       [default: https://api.devnet.solana.com/] Specify the Solana RPC URL.
+  --rpc-url-ws=<value>    Specify the Solana RPC websocket URL, default will be inferred from the RPC URL.
+
+DESCRIPTION
+  List assets by collection
+```
+
+_See code: [src/commands/mpl-core/asset/list.ts](https://github.com/samui-build/samui-collection-starter/blob/v0.0.0/src/commands/mpl-core/asset/list.ts)_
+
+## `samui-collection-starter mpl-core collection burn COLLECTION`
+
+Burn a collection
+
+```
+USAGE
+  $ samui-collection-starter mpl-core collection burn COLLECTION [--keypair-path <value>] [--rpc-url <value>] [--rpc-url-ws
+    <value>]
+
+ARGUMENTS
+  COLLECTION  Collection address
+
+GLOBAL FLAGS
+  --keypair-path=<value>  [default: ~/.config/solana/id.json] Specify the Solana keypair path.
+  --rpc-url=<value>       [default: https://api.devnet.solana.com/] Specify the Solana RPC URL.
+  --rpc-url-ws=<value>    Specify the Solana RPC websocket URL, default will be inferred from the RPC URL.
+
+DESCRIPTION
+  Burn a collection
+```
+
+_See code: [src/commands/mpl-core/collection/burn.ts](https://github.com/samui-build/samui-collection-starter/blob/v0.0.0/src/commands/mpl-core/collection/burn.ts)_
+
+## `samui-collection-starter mpl-core collection create [NAME] [URI]`
+
+Create a collection
+
+```
+USAGE
+  $ samui-collection-starter mpl-core collection create [NAME] [URI] [--keypair-path <value>] [--rpc-url <value>] [--rpc-url-ws
+    <value>]
+
+ARGUMENTS
+  NAME  Collection name
+  URI   Collection Metadata URI
+
+GLOBAL FLAGS
+  --keypair-path=<value>  [default: ~/.config/solana/id.json] Specify the Solana keypair path.
+  --rpc-url=<value>       [default: https://api.devnet.solana.com/] Specify the Solana RPC URL.
+  --rpc-url-ws=<value>    Specify the Solana RPC websocket URL, default will be inferred from the RPC URL.
+
+DESCRIPTION
+  Create a collection
+```
+
+_See code: [src/commands/mpl-core/collection/create.ts](https://github.com/samui-build/samui-collection-starter/blob/v0.0.0/src/commands/mpl-core/collection/create.ts)_
+
+## `samui-collection-starter mpl-core collection get COLLECTION`
+
+Get a collection
+
+```
+USAGE
+  $ samui-collection-starter mpl-core collection get COLLECTION [--keypair-path <value>] [--rpc-url <value>] [--rpc-url-ws
+    <value>]
+
+ARGUMENTS
+  COLLECTION  Collection address
+
+GLOBAL FLAGS
+  --keypair-path=<value>  [default: ~/.config/solana/id.json] Specify the Solana keypair path.
+  --rpc-url=<value>       [default: https://api.devnet.solana.com/] Specify the Solana RPC URL.
+  --rpc-url-ws=<value>    Specify the Solana RPC websocket URL, default will be inferred from the RPC URL.
+
+DESCRIPTION
+  Get a collection
+```
+
+_See code: [src/commands/mpl-core/collection/get.ts](https://github.com/samui-build/samui-collection-starter/blob/v0.0.0/src/commands/mpl-core/collection/get.ts)_
+
+## `samui-collection-starter mpl-core collection list [AUTHORITY]`
+
+List collections for a given authority
+
+```
+USAGE
+  $ samui-collection-starter mpl-core collection list [AUTHORITY] [--keypair-path <value>] [--rpc-url <value>] [--rpc-url-ws
+    <value>]
+
+ARGUMENTS
+  AUTHORITY  authority to list collections for, defaults to the signer address
+
+GLOBAL FLAGS
+  --keypair-path=<value>  [default: ~/.config/solana/id.json] Specify the Solana keypair path.
+  --rpc-url=<value>       [default: https://api.devnet.solana.com/] Specify the Solana RPC URL.
+  --rpc-url-ws=<value>    Specify the Solana RPC websocket URL, default will be inferred from the RPC URL.
+
+DESCRIPTION
+  List collections for a given authority
+```
+
+_See code: [src/commands/mpl-core/collection/list.ts](https://github.com/samui-build/samui-collection-starter/blob/v0.0.0/src/commands/mpl-core/collection/list.ts)_
 
 ## `samui-collection-starter plugins`
 
