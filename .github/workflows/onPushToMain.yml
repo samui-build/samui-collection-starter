@@ -3,14 +3,25 @@ name: version, tag and github release
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm run build
       - name: Check if version already exists
         id: version-check
         run: |
